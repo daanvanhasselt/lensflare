@@ -1,5 +1,7 @@
 #include "testApp.h"
 
+//#define SAVE_FRAMES
+
 //--------------------------------------------------------------
 void testApp::setup(){
     ofSetVerticalSync(true);
@@ -219,4 +221,8 @@ void testApp::draw(){
     lensFlareFbo.draw(0, 0);
     lightRays.draw(0, 0);
     firstPass.draw(0, 0);
+    
+#ifdef SAVE_FRAMES
+    ofSaveScreen("frames/"+ofToString(ofGetFrameNum(), 0)+".bmp");
+#endif
 }

@@ -21,7 +21,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>THRESH</Name>
-    <Value>0.85</Value>
+    <Value>0.816667</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
@@ -36,7 +36,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>FLAREHALOWIDTH</Name>
-    <Value>530</Value>
+    <Value>466.667</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
