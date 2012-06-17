@@ -1,6 +1,6 @@
 #include "testApp.h"
 
-//#define SAVE_FRAMES
+#define SAVE_FRAMES
 
 //--------------------------------------------------------------
 void testApp::setup(){
