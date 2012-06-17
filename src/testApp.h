@@ -16,6 +16,8 @@ public:
     ofShader scattering;
     ofFbo firstPass;
     ofFbo lightRays;
+
+    ofFbo occluded;
     
     ofShader thresholdShader;
     ofFbo thresholdFbo;

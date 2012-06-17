@@ -22,6 +22,7 @@ void testApp::setup(){
     settings.height = ofGetHeight();
     settings.internalformat = GL_RGBA;
     lightRays.allocate(settings);
+    occluded.allocate(settings);
     thresholdFbo.allocate(settings);
     lensFlareFbo.allocate(settings);
     blurredFbo.allocate(settings);
@@ -123,6 +124,7 @@ void testApp::update(){
 void testApp::draw(){
     glEnable(GL_DEPTH_TEST);
     
+    // render the scene normally
     firstPass.begin();
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofClear(0);
@@ -142,6 +144,23 @@ void testApp::draw(){
         cam.end();
     firstPass.end();
     
+    // render the sun normally and the 'occluding objects' (tank) in black
+    occluded.begin();
+    ofClear(0);
+        cam.begin();  
+        
+        ofPushMatrix();
+        ofTranslate(-2500, -4000, -5000);
+        ofSetColor(255);
+        sunImage.draw(0, 0, 2048, 2048);
+        ofPopMatrix();
+        
+            ofSetColor(0);
+            modelLoader.drawFaces();
+            ofSetColor(255);
+        cam.end();
+    occluded.end();
+    
     lightRays.begin();
     ofClear(0);
         scattering.begin();
@@ -150,7 +169,7 @@ void testApp::draw(){
         scattering.setUniform1f("density", density);
         scattering.setUniform1f("weight", weight);
         scattering.setUniform2f("lightPositionOnScreen", lightPosition.x, lightPosition.y);
-        scattering.setUniformTexture("firstPass", firstPass, 0);
+        scattering.setUniformTexture("firstPass", occluded, 0);
             glBegin(GL_QUADS);
                 int x = 0;
                 int y = 0;
